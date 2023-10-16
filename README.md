@@ -1,21 +1,21 @@
-# DocDive
-
+# 📜 DeepDocCrawler 
 Deep web exploration tool tailored for mining PDF document links from specified sites based on contextual queries.
 
-## Table of Contents
+## 📌 Table of Contents
 - [Features](#features)
 - [Installation & Setup](#installation--setup)
 - [Usage](#usage)
+- [Credentials Setup](#credentials-setup)
 - [Contributing](#contributing)
 - [License](#license)
 
-## Features
+## 🌟 Features
 
 - Deep crawling of specified websites.
 - Contextual query-based PDF document mining.
 - Scalable and efficient design.
 
-## Installation & Setup
+## 🛠 Installation & Setup
 
 ### Prerequisites
 - [Python 3.9+](https://www.python.org/downloads/)
@@ -47,13 +47,29 @@ Deep web exploration tool tailored for mining PDF document links from specified 
         - **Linux/Mac**: `source activate`
 
 4. **Install Dependencies**:
-    Once the virtual environment is activated, navigate back to the root of the project directory and run:
     ```bash
     pip install -r requirements.txt
     ```
 
-## Usage
+## 🚀 Usage
 
 ```bash
 python crawler.py --urls [URL_LIST_FILE] --queries [QUERY_FILE]
 ```
+
+## 🔐 Credentials Setup
+
+For accessing certain features, especially if integrating with Vertex AI, you'll need to set up your credentials.
+
+1. Create a `credentials` folder in the root directory.
+2. Drop your Vertex AI project-specific service account key JSON file into the `credentials` folder.
+
+🚫 **Important**: Never commit your service account key or any other sensitive information to the repository. Ensure the `credentials` folder is added to your `.gitignore` file.
+
+## 🤝 Contributing
+
+Guidelines for contributing to DocDive.
+
+## 📜 License
+
+Specify the type of license (e.g., MIT, Apache).
