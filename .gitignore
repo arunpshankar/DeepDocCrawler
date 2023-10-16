@@ -3,6 +3,18 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# venv 
+.DeepDocCrawler
+.DeepDocCrawler/
+
+# DS Code
+.DS_Code
+.DS_Code/ 
+
+# credentials 
+.credentials 
+.credentials/
+
 # C extensions
 *.so
 
