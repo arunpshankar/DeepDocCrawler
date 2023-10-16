@@ -6,8 +6,6 @@ Deep web exploration tool tailored for mining PDF document links from specified 
 - [Installation & Setup](#installation--setup)
 - [Usage](#usage)
 - [Credentials Setup](#credentials-setup)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## 🌟 Features
 
