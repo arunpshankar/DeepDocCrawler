@@ -65,11 +65,3 @@ For accessing certain features, especially if integrating with Vertex AI, you'll
 2. Drop your Vertex AI project-specific service account key JSON file into the `credentials` folder.
 
 🚫 **Important**: Never commit your service account key or any other sensitive information to the repository. Ensure the `credentials` folder is added to your `.gitignore` file.
-
-## 🤝 Contributing
-
-Guidelines for contributing to DocDive.
-
-## 📜 License
-
-Specify the type of license (e.g., MIT, Apache).
