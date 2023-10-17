@@ -1,4 +1,4 @@
-from src.crawler.deep_crawler import DeepCrawler
+from src.crawl.crawler import DeepCrawler
 
 crawler = DeepCrawler()
 

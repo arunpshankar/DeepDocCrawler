@@ -1,14 +1,10 @@
 sites:
-  - url: "https://example1.com"
-  - url: "https://example2.com"
-  - url: "https://example3.com"
-
+  - url: "https://www.sec.gov/"
+  - url: "https://abc.xyz"
 queries:
-  - "machine learning research"
-  - "neural network advancements"
-  - "AI whitepaper"
-  - "deep learning tutorials"
-  - "GPT-3 documentation"
+  - "disclosure statement"
+  - "disclosure report"
+  - "financial disclosures"
 
 document_types:
   - "pdf"

@@ -1,4 +1,4 @@
-from src.miner.pdf_miner import PDFMiner
+from src.mine.miner import PDFMiner
 
 miner = PDFMiner(["machine learning", "GPT-3"])
 
