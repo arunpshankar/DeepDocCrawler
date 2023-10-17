@@ -3,7 +3,7 @@ from src.scrape.scraper import WebScraper
 from typing import Dict, List
 import jsonlines
 
-# Setting up the logger
+
 logger = setup_logger()
 
 class WebCrawler:
