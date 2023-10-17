@@ -1,3 +1,4 @@
+from src.config.logging import setup_logger
 from urllib.parse import urlparse
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
@@ -5,9 +6,10 @@ from typing import Tuple
 from typing import Dict
 from typing import List
 import requests
-from src.config.logging import setup_logger
+
 
 logger = setup_logger()
+
 
 class WebScraper:
     def __init__(self, base_url: str):

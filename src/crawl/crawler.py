@@ -1,8 +1,9 @@
+from src.config.logging import setup_logger
+from src.scrape.scraper import WebScraper
 from typing import Dict
 from typing import List
 import jsonlines
-from src.scrape.scraper import WebScraper
-from src.config.logging import setup_logger
+
 
 logger = setup_logger()
 
