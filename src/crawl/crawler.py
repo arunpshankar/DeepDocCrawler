@@ -40,5 +40,5 @@ class WebCrawler:
                 writer.write(link)
 
 if __name__ == '__main__':
-    crawler = WebCrawler(base_url='https://www.coralgables.com/', depth=2)
+    crawler = WebCrawler(base_url='https://www.brooklinebancorp.com/', depth=10)
     crawler.crawl()
