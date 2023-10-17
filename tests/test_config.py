@@ -3,5 +3,5 @@ from src.config.setup import load_config
 
 logger = setup_logger()
 
-config = load_config("./config/data.yml")
+config = load_config('./config/config.yml')
 logger.info(config)

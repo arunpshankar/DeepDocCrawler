@@ -1,6 +1,6 @@
 sites:
-  - url: "https://www.sec.gov/"
-  - url: "https://abc.xyz"
+  - url: "https://www.coralgables.com/"
+  
 queries:
   - "disclosure statement"
   - "disclosure report"
