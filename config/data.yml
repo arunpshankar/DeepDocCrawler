@@ -1,0 +1,16 @@
+sites:
+  - url: "https://example1.com"
+  - url: "https://example2.com"
+  - url: "https://example3.com"
+
+queries:
+  - "machine learning research"
+  - "neural network advancements"
+  - "AI whitepaper"
+  - "deep learning tutorials"
+  - "GPT-3 documentation"
+
+document_types:
+  - "pdf"
+  - "doc"
+  - "pptx"
