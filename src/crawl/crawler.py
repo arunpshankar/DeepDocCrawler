@@ -1,71 +1,43 @@
-from urllib.request import urljoin 
-from bs4 import BeautifulSoup 
-import requests 
-from urllib.request import urlparse 
-from src.config.logging import setup_logger
+from typing import Dict
+from typing import List
 import jsonlines
-import yaml
+from src.scrape.scraper import WebScraper
+from src.config.logging import setup_logger
 
 logger = setup_logger()
 
-# Set for storing URLs with the same domain 
-links_intern = set() 
 
-# Set for storing URLs with different domains 
-links_extern = set() 
+class WebCrawler:
+    def __init__(self, base_url: str, depth: int = 2):
+        self.base_url = base_url
+        self.depth = depth
+        self.internal_links = []
+        self.scraper = WebScraper(base_url)
 
-# Load configuration
-def load_config(config_path="./config/config.yml") -> dict:
-    with open(config_path, 'r') as file:
-        return yaml.safe_load(file)
+    def level_crawler(self, input_url: str) -> List[Dict[str, str]]:
+        """Crawl a single level of the website."""
+        found_pages = self.scraper.extract_links(input_url)
+        urls = [link for link in found_pages if link['child'] not in [existing_link['child'] for existing_link in self.internal_links]]
+        self.internal_links.extend(urls)
+        return urls
 
-config = load_config()
+    def crawl(self):
+        """Crawl the website to the specified depth."""
+        queue = [self.base_url]
+        for _ in range(self.depth):
+            temp_queue = []
+            for url in queue:
+                found_pages = self.level_crawler(url)
+                temp_queue.extend([link_info['child'] for link_info in found_pages])
+            queue = temp_queue
+        self.save_links(self.internal_links)
 
-def level_crawler(input_url): 
-    current_url_domain = urlparse(input_url).netloc 
-    beautiful_soup_object = BeautifulSoup(requests.get(input_url).content, "lxml") 
-    temp_urls = set()
+    def save_links(self, links: List[Dict[str, str]], file_path='./data/crawled_links.jsonl'):
+        """Save the links to a jsonlines file."""
+        with jsonlines.open(file_path, mode='w') as writer:
+            for link in links:
+                writer.write(link)
 
-    for anchor in beautiful_soup_object.findAll("a"): 
-        href = anchor.attrs.get("href") 
-        if(href != "" and href is not None): 
-            href = urljoin(input_url, href) 
-            href_parsed = urlparse(href) 
-            is_valid = bool(href_parsed.scheme) and bool(href_parsed.netloc) 
-            if is_valid: 
-                if current_url_domain not in href and href not in links_extern: 
-                    logger.info("Extern - {}".format(href)) 
-                    links_extern.add(href) 
-                if current_url_domain in href and href not in links_intern: 
-                    logger.info("Intern - {}".format(href)) 
-                    links_intern.add(href) 
-                    temp_urls.add(href) 
-    return temp_urls 
-
-def bfs_crawler(seed_url):
-    # BFS queue
-    queue = [seed_url]
-    
-    while queue:
-        url = queue.pop(0)
-        urls_from_page = level_crawler(url)
-        for new_url in urls_from_page:
-            if new_url not in links_intern:
-                queue.append(new_url)
-                links_intern.add(new_url)
-
-    return links_intern
-
-def save_links(links, filename="./data/crawled_links.jsonl"):
-    structured_links = [{"seed": seed_url, "subsite": link} for link in links]
-    with jsonlines.open(filename, mode='w') as writer:
-        for link in structured_links:
-            writer.write(link)
-
-if __name__ == "__main__":
-    for site in config["sites"]:
-        seed_url = site["url"]
-        bfs_crawler(seed_url)
-
-    save_links(links_intern)
-    logger.info(f"Successfully crawled {len(links_intern)} links and saved to 'crawled_links.jsonl'.")
+if __name__ == '__main__':
+    crawler = WebCrawler(base_url='https://www.coralgables.com/', depth=2)
+    crawler.crawl()
