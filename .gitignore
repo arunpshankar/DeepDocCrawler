@@ -7,9 +7,9 @@ __pycache__/
 .DeepDocCrawler
 .DeepDocCrawler/
 
-# DS Code
-.DS_Code
-.DS_Code/ 
+# DS_Store
+.DS_Store
+.DS_Store/ 
 
 # credentials 
 .credentials 
