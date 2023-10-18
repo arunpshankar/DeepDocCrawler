@@ -71,7 +71,7 @@ class WebCrawler:
         """
         Save the found links to a jsonlines file.
         """
-        file_path = f'./data/{self.company}.jsonl'
+        file_path = f'./data/crawled_urls/{self.company}.jsonl'
         with jsonlines.open(file_path, mode='w') as writer:
             for link_info in links:
                 writer.write({

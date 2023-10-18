@@ -1,4 +1,4 @@
-from orchestrate.orchestrator import LLMOrchestrator
+from llm.selector import LLMSelector
 from crawl.crawler import WebCrawler
 from config.setup import load_config
 from mine.miner import PDFMiner
