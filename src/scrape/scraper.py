@@ -1,13 +1,18 @@
-from urllib.parse import urlparse, urljoin
-from bs4 import BeautifulSoup
-from typing import Tuple, Dict, List, Optional
-import aiohttp
 from src.config.logging import setup_logger
-import requests
-import asyncio
+from urllib.parse import urlparse
 from aiohttp import ClientTimeout
+from urllib.parse import urljoin
+from bs4 import BeautifulSoup
+from typing import Optional
 from chardet import detect
 from random import choice
+from typing import Tuple
+from typing import Dict
+from typing import List
+import requests
+import asyncio
+import aiohttp
+
 
 logger = setup_logger()
 
@@ -110,17 +115,13 @@ class WebScraper:
         for anchor in anchor_links:
             print(anchor)
             href = anchor.get('href')
-            print('<<<<<<', href)
             cleaned_href, parsed_href = self.clean_href(href)
-            print(cleaned_href, parsed_href, 'NNNNNNNN')
-            print('KKKK', current_url_domain)
             if parsed_href and parsed_href.scheme and parsed_href.netloc and self.core_domain_match(current_url_domain, cleaned_href):
                 link_info = {
                     'root': self.base_url,
                     'parent': input_url,
                     'child': cleaned_href
                 }
-                print('MMMM', link_info)
                 urls.append(link_info)
 
         return urls
