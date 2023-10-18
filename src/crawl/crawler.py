@@ -11,7 +11,7 @@ import asyncio
 logger = setup_logger()
 
 MAX_RETRIES = 3
-DELAY = 1  # 1 second delay, you can adjust this
+DELAY = 1 
 
 class WebCrawler:
     def __init__(self, base_url: str, depth: int, company: str):
@@ -19,9 +19,8 @@ class WebCrawler:
         self.base_url = base_url
         self.depth = depth
         self.company = company
-        self.internal_links = set()  # For quick look-up
-        self.link_info_list = []     # For storing full info
-        # Initializing the scraper object
+        self.internal_links = set()  
+        self.link_info_list = []    
         self.scraper = WebScraper(base_url)
 
     async def level_crawler(self, input_url: str) -> List[Dict[str, str]]:
@@ -61,10 +60,7 @@ class WebCrawler:
                 visited.add(url)  # Mark the URL as visited
             
             for found_pages in results:
-                print('>>', found_pages)
-                print('-' * 100)
                 for link_info in found_pages:
-                    print('+', link_info)
                     if link_info['child'] not in visited:
                         temp_queue.append(link_info['child'])
             
