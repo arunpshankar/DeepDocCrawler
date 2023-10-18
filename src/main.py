@@ -7,7 +7,7 @@ import asyncio
 
 
 logger = setup_logger()
-DEPTH = 10
+DEPTH = 2
 
 def main():
     with jsonlines.open('./config/sites.jsonl') as sites:

@@ -3,6 +3,7 @@ from urllib.parse import urlparse
 from aiohttp import ClientTimeout
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
+from bs4.builder import ParserRejectedMarkup
 from typing import Optional
 from chardet import detect
 from random import choice
@@ -108,17 +109,26 @@ class WebScraper:
                         logger.error(f"Failed to retrieve {input_url} with synchronous call. Error: {req_e}")
                         return urls
 
-        soup = BeautifulSoup(content, 'html.parser')
-        anchor_links = soup.find_all('a')
-        for anchor in anchor_links:
-            href = anchor.get('href')
-            cleaned_href, parsed_href = self.clean_href(href)
-            if parsed_href and parsed_href.scheme and parsed_href.netloc and self.core_domain_match(current_url_domain, cleaned_href):
-                link_info = {
-                    'root': self.base_url,
-                    'parent': input_url,
-                    'child': cleaned_href
-                }
-                urls.append(link_info)
+        try:
+            soup = BeautifulSoup(content, 'html.parser')
+            anchor_links = soup.find_all('a')
+            for anchor in anchor_links:
+                href = anchor.get('href')
+                cleaned_href, parsed_href = self.clean_href(href)
+                if parsed_href and parsed_href.scheme and parsed_href.netloc and self.core_domain_match(current_url_domain, cleaned_href):
+                    link_info = {
+                        'root': self.base_url,
+                        'parent': input_url,
+                        'child': cleaned_href
+                    }
+                    urls.append(link_info)
+        except ParserRejectedMarkup:
+            # Handle the BeautifulSoup parsing exception
+            logger.error(f"Failed to parse content from {input_url}. The provided markup may be malformed or in an unexpected format.")
+            return []
+        except Exception as e:
+            # General error handling
+            logger.error(f"An unexpected error occurred while processing {input_url}. Error: {e}")
+            return []
 
         return urls
