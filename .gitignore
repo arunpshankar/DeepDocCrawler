@@ -3,6 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# collected_pdfs
+data/collected_pdfs
+data/collected_pdfs/
+
 # venv 
 .DeepDocCrawler
 .DeepDocCrawler/
