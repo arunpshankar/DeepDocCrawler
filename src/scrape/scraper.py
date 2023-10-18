@@ -99,7 +99,7 @@ class WebScraper:
 
             except (aiohttp.ClientConnectorSSLError, aiohttp.ClientConnectorError, asyncio.TimeoutError, ValueError) as e:
                 error_type = type(e).__name__
-                logger.warning(f"Async error occurred for {input_url}. Type={error_type}")
+                logger.warning(f"Async error occurred for {input_url}. Type={error_type} Falling back to synchronous call.")
                 if retry == max_retries or isinstance(e, ValueError):  # Retry on async errors but immediately fallback on ValueError
                     try:
                         response = requests.get(input_url, headers=headers)
