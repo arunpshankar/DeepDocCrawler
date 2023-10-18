@@ -6,7 +6,7 @@ import jsonlines
 import asyncio
 
 
-DEPTH = 5
+DEPTH = 2
 
 def main():
     with jsonlines.open('./config/sites.jsonl') as sites:

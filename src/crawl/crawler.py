@@ -10,7 +10,7 @@ import asyncio
 
 logger = setup_logger()
 
-MAX_RETRIES = 3
+MAX_RETRIES = 2
 DELAY = 1 
 
 class WebCrawler:

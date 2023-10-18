@@ -71,7 +71,7 @@ class WebScraper:
 
         current_url_domain = urlparse(input_url).netloc
         urls = []
-        max_retries = 3
+        max_retries = 2
 
         for retry in range(max_retries + 1):  # +1 to account for the first try
             logger.info(f'Scraping URL: {input_url} (Attempt: {retry + 1})')
@@ -113,7 +113,6 @@ class WebScraper:
         soup = BeautifulSoup(content, 'html.parser')
         anchor_links = soup.find_all('a')
         for anchor in anchor_links:
-            print(anchor)
             href = anchor.get('href')
             cleaned_href, parsed_href = self.clean_href(href)
             if parsed_href and parsed_href.scheme and parsed_href.netloc and self.core_domain_match(current_url_domain, cleaned_href):
