@@ -1,21 +1,23 @@
-from llm.selector import LLMSelector
+from src.config.logging import setup_logger
 from crawl.crawler import WebCrawler
 from config.setup import load_config
-from mine.miner import PDFMiner
+from src.prune.pruner import Pruner
 import jsonlines
 import asyncio
 
 
-DEPTH = 2
+logger = setup_logger()
+DEPTH = 1
 
 def main():
     with jsonlines.open('./config/sites.jsonl') as sites:
         for site in sites:
-            print(site)
             company = site['Company']
             url = site['URL']
             crawler = WebCrawler(base_url=url, depth=DEPTH, company=company)
             asyncio.run(crawler.crawl())
+    pruner = Pruner()
+    pruner.process_files()
 
 if __name__ == '__main__':
     main()

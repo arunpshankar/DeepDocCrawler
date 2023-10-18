@@ -1,4 +1,3 @@
-from src.config.logging import setup_logger
 from multiprocessing import cpu_count, Pool
 from src.prune.llm import LLM
 from bs4 import BeautifulSoup
@@ -23,8 +22,21 @@ class Pruner:
         prompt = llm_instance.construct_prompt(content, child_url)
         response_str = llm_instance.classify(prompt)
         clean_response_str = response_str.replace('```JSON\n', '').replace('```', '').strip()
-        classification_json = json.loads(clean_response_str)
-        return classification_json['classification'], classification_json['rationale']
+        
+        # Check the content before parsing
+        if not clean_response_str:
+            print(f"No content returned from LLM for URL: {child_url}")
+            return 'Unclassified', 'No content to classify'
+
+        try:
+            classification_json = json.loads(clean_response_str)
+            classification = classification_json['classification']
+            rationale = classification_json['rationale']
+            return classification, rationale
+        except json.JSONDecodeError:
+            print(f"Error decoding JSON for URL: {child_url}. Content: {clean_response_str}")
+            return 'Unclassified', 'Error decoding response'
+
 
     def download_pdf(self, url, company_name, file_name):
         """Download the PDF from the given URL and save it with the specified filename."""
@@ -42,14 +54,13 @@ class Pruner:
             file.write('\n')  # New line for next JSON entry
 
     def process_single_line(self, line, company_name):
-        logger = setup_logger()
         llm_instance = LLM()
 
         data = json.loads(line)
         child_url = data['child']
         if self.is_pdf_url(child_url):
             pdf_name = child_url.split('/')[-1].replace('.pdf', '')
-            logger.info(f'Processing URL: {child_url}')
+            print(f'Processing URL: {child_url}')
 
             response = requests.get(data['parent'])
             soup = BeautifulSoup(response.text, 'html.parser')
