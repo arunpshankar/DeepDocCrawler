@@ -1,0 +1,12 @@
+sites:
+  - url: "https://www.coralgables.com/"
+  
+queries:
+  - "disclosure statement"
+  - "disclosure report"
+  - "financial disclosures"
+
+document_types:
+  - "pdf"
+  - "doc"
+  - "pptx"
