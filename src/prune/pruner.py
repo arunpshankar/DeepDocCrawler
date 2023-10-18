@@ -66,7 +66,7 @@ class Pruner:
             soup = BeautifulSoup(response.text, 'html.parser')
 
             classification, rationale = self.classify_content(soup.text, child_url, llm_instance)
-            if classification != 'Unclassified':
+            if classification.lower() != 'unclassified':
                 self.download_pdf(child_url, company_name, pdf_name)
 
                 metadata = {

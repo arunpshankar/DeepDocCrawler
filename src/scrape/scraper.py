@@ -81,10 +81,9 @@ class WebScraper:
                 async with aiohttp.ClientSession() as session:
                     async with session.get(input_url, headers=headers, timeout=timeout) as response:
                         if response.status != 200:
-                            logger.warning(f"Failed to retrieve {input_url}")
-                            logger.warning(response)
-                            return urls
-
+                            logger.warning(f"Failed to retrieve {input_url} with status {response.status}. Falling back to synchronous call.")
+                            raise ValueError("Non-200 status code")
+                        
                         content_type = response.headers.get('Content-Type', '').lower()
                         if 'text' not in content_type:
                             logger.warning(f"Non-textual content at {input_url}. Skipping.")
@@ -98,11 +97,10 @@ class WebScraper:
                             content = content_bytes.decode(detected_encoding or 'utf-8', errors='ignore')
                         break  # If successful, break out of the retry loop
 
-            except (aiohttp.ClientConnectorSSLError, aiohttp.ClientConnectorError, asyncio.TimeoutError) as e:
+            except (aiohttp.ClientConnectorSSLError, aiohttp.ClientConnectorError, asyncio.TimeoutError, ValueError) as e:
                 error_type = type(e).__name__
                 logger.warning(f"Async error occurred for {input_url}. Type={error_type}")
-                if retry == max_retries:
-                    logger.warning("Falling back to synchronous call.")
+                if retry == max_retries or isinstance(e, ValueError):  # Retry on async errors but immediately fallback on ValueError
                     try:
                         response = requests.get(input_url, headers=headers)
                         content = response.text
