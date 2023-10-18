@@ -1,11 +1,15 @@
+from aiohttp.client_exceptions import ServerDisconnectedError
+from aiohttp.client_exceptions import ClientError
 from src.config.logging import setup_logger
-from aiohttp.client_exceptions import ServerDisconnectedError, ClientError
 from src.scrape.scraper import WebScraper
-from typing import Dict, List
+from typing import Dict
+from typing import List
 import jsonlines
 import asyncio
 
+
 logger = setup_logger()
+
 MAX_RETRIES = 3
 DELAY = 1  # 1 second delay, you can adjust this
 
@@ -19,8 +23,6 @@ class WebCrawler:
         self.link_info_list = []     # For storing full info
         # Initializing the scraper object
         self.scraper = WebScraper(base_url)
-
-
 
     async def level_crawler(self, input_url: str) -> List[Dict[str, str]]:
         for retry in range(MAX_RETRIES):
@@ -46,7 +48,6 @@ class WebCrawler:
         logger.error(f"Failed to fetch URL: {input_url} after {MAX_RETRIES} retries.")
         return []
 
-
     async def crawl(self):
         queue = [self.base_url]
         visited = set()  # To keep track of visited links
@@ -69,8 +70,6 @@ class WebCrawler:
             
             queue = temp_queue
         self.save_links(self.link_info_list)
-
-
 
     def save_links(self, links: List[Dict[str, str]]):
         """
