@@ -1,7 +1,9 @@
-# 📜 DeepDocCrawler 
+# 📜 DeepDocCrawler
+
 A deep web exploration tool tailored for crawling a list of provided website URLs and mining deep links that point to PDFs. DeepDocCrawler uses context-based queries to decide which PDFs to download from the specified sites. It leverages Large Language Models (LLM) to smartly filter and prune the crawled URLs.
 
 ## 📌 Table of Contents
+
 - [Features](#features)
 - [Installation & Setup](#installation--setup)
 - [Credentials Setup](#credentials-setup)
@@ -16,11 +18,14 @@ A deep web exploration tool tailored for crawling a list of provided website URL
 ## 🛠 Installation & Setup
 
 ### Prerequisites
+
 - [Python 3.9+](https://www.python.org/downloads/)
 - [VSCode](https://code.visualstudio.com/)
 
 ### Setup Instructions
+
 1. **Clone the Repository**:
+
     ```bash
     git clone https://github.com/your-username/DeepDocCrawler.git
     cd DeepDocCrawler
@@ -43,11 +48,13 @@ A deep web exploration tool tailored for crawling a list of provided website URL
         - **Linux/Mac**: `source activate`
 
 4. **Install Dependencies**:
+
     ```bash
     pip install -r requirements.txt
     ```
 
 5. Set up the Python path:
+
     ```bash
     export PYTHONPATH=$PYTHONPATH:.
     ```
@@ -68,14 +75,17 @@ To utilize some advanced features, especially when integrating with Vertex AI, f
     - Fill `topics.jsonl` with topics that will aid in pruning the PDF URLs.
 
 2. Kick-off the crawling process:
+
     ```bash
     python src/main.py
     ```
+
     Note: Crawling can take several hours, depending on the initial configuration (number of sites and depth for BFS).
 
 3. Once crawling completes, the tool processes the URLs to prune potential PDF candidates. It leverages Vertex AI's chat-bison LLM, using metadata from `topics.jsonl` to contextually evaluate PDF content. If the content aligns with specified topics, the PDF is considered for download.
 
 4. The pruner classifies PDF URLs and saves them in a JSONL file (one per website) under the `selected_urls` directory. Example format:
+
     ```json
     {
       "company": "BANKHAUS J",
