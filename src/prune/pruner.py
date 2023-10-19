@@ -1,7 +1,7 @@
-from multiprocessing import cpu_count, Pool
+from multiprocessing import cpu_count
+from multiprocessing import Pool
 from src.prune.llm import LLM
 from bs4 import BeautifulSoup
-import multiprocessing
 import requests
 import json
 import os
@@ -15,11 +15,15 @@ class Pruner:
         self.base_metadata_dir = './data/selected_urls/'
 
     def is_pdf_url(self, url):
-        """Check if the URL points to a PDF."""
+        """
+        Check if the URL points to a PDF.
+        """
         return url.lower().endswith('.pdf')
 
     def classify_content(self, content, child_url, llm_instance):
-        """Classify the content into one of the specified topics using the LLM prompt."""
+        """
+        Classify the content into one of the specified topics using the LLM prompt.
+        """
         prompt = llm_instance.construct_prompt(content, child_url)
         response_str = llm_instance.classify(prompt)
         clean_response_str = response_str.replace('```JSON\n', '').replace('```', '').strip()
@@ -40,7 +44,9 @@ class Pruner:
 
 
     def download_pdf(self, url, company_name, file_name):
-        """Download the PDF from the given URL and save it with the specified filename."""
+        """
+        Download the PDF from the given URL and save it with the specified filename.
+        """
         response = requests.get(url)
         company_dir = os.path.join(self.base_pdf_dir, company_name)
         if not os.path.exists(company_dir):
@@ -49,7 +55,9 @@ class Pruner:
             file.write(response.content)
 
     def append_metadata(self, metadata, company_name):
-        """Append the classification and rationale as metadata to the company's JSONL file."""
+        """
+        Append the classification and rationale as metadata to the company's JSONL file.
+        """
         with open(os.path.join(self.base_metadata_dir, f'{company_name}_metadata.jsonl'), 'a') as file:
             json.dump(metadata, file)
             file.write('\n')  # New line for next JSON entry
@@ -79,7 +87,9 @@ class Pruner:
                 self.append_metadata(metadata, company_name)
 
     def process_files(self):
-        """Process all the JSONL files in the data/crawled_urls/ directory."""
+        """
+        Process all the JSONL files in the data/crawled_urls/ directory.
+        """
         # Ensure required directories exist
         if not os.path.exists(self.base_pdf_dir):
             os.makedirs(self.base_pdf_dir)
