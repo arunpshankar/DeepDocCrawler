@@ -1,6 +1,7 @@
 from multiprocessing import cpu_count, Pool
 from src.prune.llm import LLM
 from bs4 import BeautifulSoup
+import multiprocessing
 import requests
 import json
 import os
@@ -91,9 +92,13 @@ class Pruner:
             for filename in os.listdir(self.base_url_dir):
                 with open(os.path.join(self.base_url_dir, filename), 'r') as file:
                     company_name = filename.split('.')[0]
-                    # Use starmap to pass multiple arguments to process_single_line
-                    pool.starmap(self.process_single_line, [(line, company_name) for line in file])
-
+                    try:
+                        # Use starmap to pass multiple arguments to process_single_line
+                        pool.starmap(self.process_single_line, [(line, company_name) for line in file])
+                    except Exception as e:
+                        print(f"Error processing file {filename}. Reason: {e}")
+                        continue  
+               
 if __name__ == '__main__':
     pruner = Pruner()
     pruner.process_files()
