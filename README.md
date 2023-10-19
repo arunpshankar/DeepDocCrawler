@@ -98,3 +98,7 @@ To utilize some advanced features, especially when integrating with Vertex AI, f
 5. Finally, the tool downloads the PDFs from the selected URLs and saves them in the `collected_pdfs` directory.
 
 ---
+**Notes:**
+
+- The default Breadth-First Search (BFS) depth is set to 3. Adjust as needed, but be aware that a higher depth will result in longer crawling times.
+- PDFs saved in `collected_pdfs` under the `data` directory are ignored by Git to prevent unintentional pushes. Ensure to backup or persist your data as needed.
