@@ -1,9 +1,9 @@
+from bs4.builder import ParserRejectedMarkup
 from src.config.logging import setup_logger
 from urllib.parse import urlparse
 from aiohttp import ClientTimeout
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
-from bs4.builder import ParserRejectedMarkup
 from typing import Optional
 from chardet import detect
 from random import choice
@@ -123,11 +123,9 @@ class WebScraper:
                     }
                     urls.append(link_info)
         except ParserRejectedMarkup:
-            # Handle the BeautifulSoup parsing exception
             logger.error(f"Failed to parse content from {input_url}. The provided markup may be malformed or in an unexpected format.")
             return []
         except Exception as e:
-            # General error handling
             logger.error(f"An unexpected error occurred while processing {input_url}. Error: {e}")
             return []
 
