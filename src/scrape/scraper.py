@@ -76,7 +76,7 @@ class WebScraper:
 
         for retry in range(max_retries + 1):  # +1 to account for the first try
             logger.info(f'Scraping URL: {input_url} (Attempt: {retry + 1})')
-            timeout = ClientTimeout(total=5)  # Set to 5 seconds
+            timeout = ClientTimeout(total=1)  # Set to 1 second
 
             try:
                 async with aiohttp.ClientSession() as session:
