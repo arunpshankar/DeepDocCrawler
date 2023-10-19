@@ -7,6 +7,10 @@ __pycache__/
 .DeepDocCrawler
 .DeepDocCrawler/
 
+# collected_pdfs
+data/collected_pdfs
+data/collected_pdfs/
+
 # DS_Store
 .DS_Store
 .DS_Store/ 
