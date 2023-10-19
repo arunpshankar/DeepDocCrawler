@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 9]><html class="ie8 no-js"><![endif]-->
+<!--[if IE 9]><html class="ie9 no-js"><![endif]-->
+<html class="no-js">
+<head>
+    <title>Renewi</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background-color: #ffffff;
+            color: #737373;
+            line-height: 24px;
+            font-size: 1rem;
+            font-family: Source Sans Pro,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;
+        }
+
+
+        /* Layout */
+        .o-container--l {
+            position: relative;
+            width: 73.25em;
+            max-width: 100%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .o-container--m {
+            position: relative;
+            width: 63em;
+            max-width: 100%;
+            margin: 0 auto;
+            padding-left: 24px;
+            padding-right: 24px;
+            text-align: left;
+        }
+        .o-container--b {
+            position: relative;
+            width: 63em;
+            max-width: 100%;
+            margin: 0 auto;
+            padding-left: 24px;
+            padding-right: 24px;
+            text-align: center;
+            background-color: #0055a0;
+            min-height: 150px;
+            border-radius: 10px;
+        }
+
+        .c-header {
+            background: #0055a0;
+            background: linear-gradient(180deg,rgba(0,0,0,.2) 0,transparent 25%,transparent),linear-gradient(90deg,#0055a0 25%,#009de0 50%,#78be20);
+            position: relative;
+            height: 80px;
+        }
+
+        .c-header > .o-container--l {
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+
+        .renewi-logo {
+	        background-image: url(https://www.renewi.com/-/media/renewi/logos/renewi_white_no-strapline_rgb_60px.svg);
+            background-repeat: no-repeat;
+            width: 107px;
+            height: 72px;
+            display: inline-block;
+            margin-top: 10px;
+        } 
+
+        .mineralz-logo {
+            background-image: url(https://www.mineralz.com/-/media/mineralz/logos/mineralz_white_no-strapline_rgb_60px.svg);
+            background-repeat: no-repeat;
+            width: 180px;
+            height: 72px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .coolrec-logo {
+            background-image: url(https://www.coolrec.com/-/media/website-coolrec/logos/coolrec_white_web.png);
+            background-repeat: no-repeat;
+            width: 180px;
+            height: 72px;
+            display: inline-block;
+            margin-top: 15px;
+        } 
+        .hydrovac-logo {
+            background-image: url(https://www.hydrovac.nl/-/media/hydrovac/hydrovac_logo_v2.png);
+            background-repeat: no-repeat;
+            width: 117px;
+            height: 72px;
+            display: inline-block;
+            margin-top: 10px;
+        } 
+        .induserve-logo {
+            background-image: url(https://www.induserve.nl/-/media/induserve/induserve_logo.gif);
+            background-repeat: no-repeat;
+            background-size: 300px 100px;
+            width: 107px;
+            height: 72px;
+            display: inline-block;
+            margin-top: 10px;
+        } 
+        .reym-logo {
+            background-image: url(https://www.reym.nl/-/media/reym/reym_logo_white_new.png);
+            background-repeat: no-repeat;
+            background-size: 300px 100px;
+            width: 107px;
+            height: 72px;
+            display: inline-block;
+            margin-top: 10px;
+        } 
+        /* Typography */
+        h1 {
+            font-size: 2rem;
+            color: #0055a0;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        /* Margins */
+        .mt\+\+ {
+            margin-top: 96px !important;
+        }
+
+        /* Trumps */
+        .u-text-align--left {
+            text-align: left;
+        }
+
+        /* Logo's*/
+        .logos {
+            display: inline-block;
+            margin-top: 40px;
+             padding: 8px;
+        }
+
+    </style>
+</head>
+<body>
+    <header class="c-header">
+        <div class="o-container--l">
+            <span class="renewi-logo"></span>
+        </div>
+    </header>
+    <div class="o-container--m">
+        <h1 class="mt++">Error 403</h1>
+	<p>The request is forbidden.</p>
+        <p>Het verzoek is verboden.</p>
+        <p>Cette demande est interdite.</p>
+    </div>
+    <div class="o-container--b mt++">
+        <img class="logos" src="https://www.renewi.com/-/media/renewi/logos/renewi_white_no-strapline_rgb_60px.svg" width="163" height="72">
+    </div>
+</body>
+</html>
