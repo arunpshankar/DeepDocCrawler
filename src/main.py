@@ -1,9 +1,8 @@
-import jsonlines
-import asyncio
-
 from src.config.logging import setup_logger
 from crawl.crawler import WebCrawler
 from src.prune.pruner import Pruner
+import jsonlines
+import asyncio
 
 
 # Constants
