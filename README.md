@@ -96,3 +96,5 @@ To utilize some advanced features, especially when integrating with Vertex AI, f
     ```
 
 5. Finally, the tool downloads the PDFs from the selected URLs and saves them in the `collected_pdfs` directory.
+
+---
