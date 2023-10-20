@@ -27,7 +27,7 @@ A deep web exploration tool tailored for crawling a list of provided website URL
 1. **Clone the Repository**:
 
     ```bash
-    git clone https://github.com/your-username/DeepDocCrawler.git
+    git clone https://github.com/arunpshankar/DeepDocCrawler.git
     cd DeepDocCrawler
     ```
 
